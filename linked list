@@ -1,0 +1,72 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int data;
+    struct node * n;
+  };
+void add(struct node * h)
+{
+    while(h->n!=NULL)
+    {
+        h=h->n;
+    }
+    struct node * newnode=(struct node*)(malloc(sizeof(struct node)));
+    scanf("%d",&newnode->data);
+
+    newnode->n=NULL;
+    h->n=newnode;
+    return newnode;
+
+}
+void display(struct node *h)
+{
+    while(h!=NULL)
+    {
+
+        printf("%d ",h->data);
+        h=h->n;
+    }
+}
+void find(struct node* h,int p)
+{
+     struct node* temp1=h;
+     struct node* temp2=h;
+     int c=0;
+     while(c<p-1)
+     {
+         temp1=temp1->n;
+         c++;
+     }
+     while(temp1->n!=NULL)
+     {
+         temp1=temp1->n;
+         temp2=temp2->n;
+     }
+     printf("%d",temp2->data);
+}
+int main()
+{
+    int s;
+    scanf("%d",&s);
+    struct node * head=(struct node*)(malloc(sizeof(struct node)));
+    struct node* temp=head;
+
+    printf("enter %d values",s);
+    scanf("%d",&head->data);
+    head->n=NULL;
+    s--;
+    while(s>0)
+    {
+        add(head);
+        s--;
+    }
+    display(head);
+    int n,f;
+    printf("enter ele to find");
+    scanf("%d",&n);
+    find(head,n);
+
+
+}
